@@ -1,7 +1,6 @@
 ## The chart API version
 apiVersion: v1
 ## The name of the chart. 
-## In this case,  the chart name is`python-helloworld `.
 name: techtrends 
 ## A single-sentence description of this project
 description: project1
