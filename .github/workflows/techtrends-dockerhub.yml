@@ -42,4 +42,4 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64
           push: true
-          tags: {{ hchen84 }}/TechTrends:latest
+          tags: hainche/TechTrends:latest
