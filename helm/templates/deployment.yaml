@@ -27,22 +27,23 @@ spec:
       - image: {{ .Values.image.repository }} : {{ .Values.image.tag }}
         imagePullPolicy:  {{ .Values.image.pullPolicy }}
         name: techtrends
-        ports:
-            - containerPort: 3111
-              name: rest
-        resources:
-          requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
-          limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 3111
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: 3111
+        resources: {{ toYaml .Values.resources | indent 12 }}
+        # ports:
+        #     - containerPort: 3111
+        #       name: rest
+        # resources:
+        #   requests:
+        #     cpu: {{ .Values.resources.requests.cpu }}
+        #     memory: {{ .Values.resources.requests.memory }}
+        #   limits:
+        #     cpu: {{ .Values.resources.limits.cpu }}
+        #     memory: {{ .Values.resources.limits.memory }}
+        # livenessProbe:
+        #   httpGet:
+        #     path: /healthz
+        #     port: 3111
+        # readinessProbe:
+        #   httpGet:
+        #     path: /healthz
+        #     port: 3111
 
