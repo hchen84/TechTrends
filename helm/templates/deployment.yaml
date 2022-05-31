@@ -24,10 +24,11 @@ spec:
         tag: latest
     spec:
       containers:
-      - image: {{ .Values.image.repository }} : {{ .Values.image.tag }}
+      - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy:  {{ .Values.image.pullPolicy }}
         name: techtrends
-        resources: {{ toYaml .Values.resources | indent 12 }}
+        resources: 
+{{ toYaml .Values.resources | indent 12 }}
         # ports:
         #     - containerPort: 3111
         #       name: rest
