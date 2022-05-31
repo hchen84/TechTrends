@@ -5,9 +5,9 @@ metadata:
     app: techtrends
     tag: latest
   name: techtrends
-  namespace: sandbox
+  namespace: {{ .Values.namespace.name }} 
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
       app: techtrends
@@ -24,19 +24,19 @@ spec:
         tag: latest
     spec:
       containers:
-      - image: techtrends:latest
-        imagePullPolicy: IfNotPresent
+      - image: {{ .Values.image.repository }} : {{ .Values.image.tag }}
+        imagePullPolicy:  {{ .Values.image.pullPolicy }}
         name: techtrends
         ports:
             - containerPort: 3111
               name: rest
         resources:
           requests:
-            cpu: 250m
-            memory: 64Mi
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
           limits:
-            cpu: 500m
-            memory: 128Mi
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
         livenessProbe:
           httpGet:
             path: /healthz
