@@ -2,15 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ .Values.app.name }} 
+    app: {{ .Values.appName }} 
     tag: {{ .Values.image.tag }}
-  name: {{ .Values.app.name }} 
+  name: {{ .Values.appName }} 
   namespace: {{ .Values.namespace.name }} 
 spec:
   replicas: {{ .Values.replicaCount }} 
   selector:
     matchLabels:
-      app: {{ .Values.app.name }}
+      app: {{ .Values.appName }}
       tag: {{ .Values.image.tag }}
   strategy:
     rollingUpdate:
@@ -20,17 +20,18 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.app.name }}
+        app: {{ .Values.appName }}
         tag: {{ .Values.image.tag }}
     spec:
       containers:
       - image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
         imagePullPolicy:  {{ .Values.image.pullPolicy }}
-        name: techtrends
+        name: {{ .Values.appName }}
         resources: 
 {{ toYaml .Values.resources | indent 12 }}
         ports:
             - containerPort: {{ .Values.containerPorts.http.port }}
+              name: rest
         livenessProbe:
           httpGet:
             path: {{ .Values.livenessProbe.httpGet.path }}
